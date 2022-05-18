@@ -28,15 +28,15 @@ dataset <- paste0("profiles", yr_str)
 
 nhood_req <- tibble::enframe(dist_files, name = "city", value = "fn") %>%
   tidyr::unnest(fn) %>%
-  mutate(desc = paste("ACS basic indicators, CDC life expectancy estimates, PLACES Project averages,", city),
-         url = file.path("https://github.com/CT-Data-Haven", repo, "blob", "main", "to_distro", fn)) %>%
+  mutate(
+    desc = paste("ACS basic indicators, CDC life expectancy estimates, PLACES Project averages,", city),
+    url = file.path("https://github.com/CT-Data-Haven", repo, "blob", "main", "to_distro", fn)
+  ) %>%
   pmap(function(city, fn, desc, url) {
     dwapi::file_create_or_update_request(file_name = fn, url = url, description = desc, labels = list("clean data"))
   })
 
-walk(nhood_req, ~dwapi::update_dataset(owner_id = ds_own, dataset_id = dataset, dwapi::dataset_update_request(files = list(.))))
+walk(nhood_req, ~ dwapi::update_dataset(owner_id = ds_own, dataset_id = dataset, dwapi::dataset_update_request(files = list(.))))
 
 dwapi::update_dataset(owner_id = ds_own, dataset_id = dataset, dwapi::dataset_update_request(license = "CC-BY-SA"))
 dwapi::sync(owner_id = ds_own, dataset_id = dataset)
-
-# write out dw urls

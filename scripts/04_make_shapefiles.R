@@ -7,7 +7,9 @@ library(sf, warn.conflicts = FALSE, quietly = TRUE)
 shps <- tibble::lst(cwi::bridgeport_sf, cwi::hartford_sf, cwi::new_haven_sf, cwi::stamford_sf) %>%
   set_names(stringr::str_extract, "([a-z_]+)(?=_sf)") %>%
   map(st_transform, 4326) %>%
-  map(st_cast, "MULTIPOLYGON")
+  map(st_cast, "MULTIPOLYGON") %>%
+  imap(function(shp, city) mutate(shp, name = ifelse(name %in% dupe_nhoods, paste(name, stringr::str_to_title(city)), name))) %>%
+  map(function(shp) mutate(shp, name = stringr::str_replace(name, "\\bOf\\b", "of")))
 
 # topojson_write is deprecated
 # iwalk(function(shp, city) {

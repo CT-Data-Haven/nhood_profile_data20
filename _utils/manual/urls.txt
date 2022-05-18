@@ -1,6 +1,6 @@
 file,slug
-bridgeport,jqbus5hka3z4auhwpeh3xixlwh3xve
-hartford,cifoes6grrqsjvwyeukjwauc7fmuih
-new_haven,yu44iuou772wls2cvrojumhlc4ua36
-stamford,ygct5trv7bzfifj4n3525xoikfkmiz
-towns_basic,omgpizmo27kwppduz3xsesfi7wrpdc
+bridgeport,yothyngelggt2gseazf6gz3asrpul3
+hartford,l45mjow6bxl5aksrcoe6piqyxtlgc3
+new_haven,qqc7cqnzeitfsclq5ubffml35fxdl7
+stamford,sjpgg7jbvvlsk7ri5slhgcoh2b2gic
+towns_basic,
